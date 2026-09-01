@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library Management System - V3</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">📚 Library V3</div>
+    <nav>
+      <button class="nav-btn active" data-view="dashboard">Dashboard</button>
+      <button class="nav-btn" data-view="books">Books</button>
+      <button class="nav-btn" data-view="members">Members</button>
+      <button class="nav-btn" data-view="loans">Loans</button>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <h1 id="page-title">Dashboard</h1>
+        <p>Library Management System — Version 3</p>
+      </div>
+    </header>
+
+    <section id="dashboard" class="view active">
+      <div class="stats">
+        <article class="stat-card"><span>Total Books</span><strong id="total-books">0</strong></article>
+        <article class="stat-card"><span>Available Books</span><strong id="available-books">0</strong></article>
+        <article class="stat-card"><span>Members</span><strong id="total-members">0</strong></article>
+        <article class="stat-card"><span>Active Loans</span><strong id="active-loans">0</strong></article>
+        <article class="stat-card danger"><span>Overdue</span><strong id="overdue-loans">0</strong></article>
+      </div>
+      <div class="panel">
+        <h2>Version 3 Features</h2>
+        <ul class="feature-list">
+          <li>Full-stack Node.js + Express application</li>
+          <li>SQLite relational database with foreign keys</li>
+          <li>REST API for books, members, loans and dashboard statistics</li>
+          <li>Book and member CRUD operations</li>
+          <li>Borrow and return workflow with availability tracking</li>
+          <li>Automatic overdue detection</li>
+          <li>Responsive dashboard interface</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="books" class="view">
+      <div class="toolbar">
+        <div class="search-row">
+          <input id="book-search" placeholder="Search title, author or ISBN">
+          <select id="book-category"><option value="">All categories</option></select>
+          <select id="book-status">
+            <option value="">All availability</option>
+            <option value="available">Available</option>
+            <option value="unavailable">Unavailable</option>
+          </select>
+        </div>
+        <button class="primary" onclick="openBookModal()">+ Add Book</button>
+      </div>
+      <div class="panel table-wrap">
+        <table>
+          <thead><tr><th>Title</th><th>Author</th><th>ISBN</th><th>Category</th><th>Copies</th><th>Actions</th></tr></thead>
+          <tbody id="books-table"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="members" class="view">
+      <div class="toolbar">
+        <input id="member-search" placeholder="Search members by name, email or phone">
+        <button class="primary" onclick="openMemberModal()">+ Add Member</button>
+      </div>
+      <div class="panel table-wrap">
+        <table>
+          <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Active Loans</th><th>Actions</th></tr></thead>
+          <tbody id="members-table"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="loans" class="view">
+      <div class="toolbar">
+        <select id="loan-status">
+          <option value="all">All loans</option>
+          <option value="borrowed">Active</option>
+          <option value="overdue">Overdue</option>
+          <option value="returned">Returned</option>
+        </select>
+        <button class="primary" onclick="openLoanModal()">+ Borrow Book</button>
+      </div>
+      <div class="panel table-wrap">
+        <table>
+          <thead><tr><th>Book</th><th>Member</th><th>Borrowed</th><th>Due</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody id="loans-table"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-box">
+      <button class="close" onclick="closeModal()">×</button>
+      <h2 id="modal-title"></h2>
+      <form id="modal-form"></form>
+    </div>
+  </div>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>
